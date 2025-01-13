@@ -13,8 +13,9 @@ class UserController extends ChangeNotifier {
 
   UserController(this.service);
 
-  Future<UserModel> fetchUsers(String userId) async {
+  Future<void> fetchUsers(String userId) async {
     isLoading = true;
+    error = '';
     notifyListeners();
     try {
       user = await service.fetchUsers(userId);
@@ -22,6 +23,6 @@ class UserController extends ChangeNotifier {
       error = e.toString();
     }
     isLoading = false;
-    return user;
+    notifyListeners();
   }
 }

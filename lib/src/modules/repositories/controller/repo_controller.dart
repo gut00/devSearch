@@ -43,6 +43,7 @@ class RepoController extends ChangeNotifier {
       newRepoList = reset ? newRepos : [...newRepoList, ...newRepos];
       _hasMoreData = newRepos.length >= perPage;
       if (_hasMoreData) currentPage++;
+      notifyListeners();
     } catch (e) {
       error = e.toString();
     } finally {

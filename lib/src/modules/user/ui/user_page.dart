@@ -30,7 +30,6 @@ class _UserPageState extends State<UserPage> {
   void initState() {
     _loadRepos();
     super.initState();
-
     _scrollController.addListener(() {
       if (_scrollController.position.pixels == _scrollController.position.maxScrollExtent) {
         if (!_isLoading) {
@@ -47,7 +46,6 @@ class _UserPageState extends State<UserPage> {
       widget.repoController.repoList.clear();
       widget.repoController.newRepoList.clear();
     });
-
     widget.repoController
         .fetchRepos(
       widget.userController.user.userId!,
@@ -89,6 +87,7 @@ class _UserPageState extends State<UserPage> {
       _selectedDirection = direction;
       _currentPage = 1;
       _isLoading = true;
+      widget.repoController.newRepoList.clear();
     });
     widget.repoController.setSorting(sort, direction, widget.userController.user.userId!).then((_) {
       _loadRepos();
@@ -303,13 +302,13 @@ class _UserPageState extends State<UserPage> {
                     value: _selectedDirection,
                     items: [
                       DropdownMenuItem(
-                          value: "desc",
+                          value: "asc",
                           child: Text(
                             "Descendente",
                             style: styleText(),
                           )),
                       DropdownMenuItem(
-                          value: "asc",
+                          value: "desc",
                           child: Text(
                             "Crescente",
                             style: styleText(),

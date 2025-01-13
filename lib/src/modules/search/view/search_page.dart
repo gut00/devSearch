@@ -72,25 +72,14 @@ class SearchPageState extends State<SearchPage> {
               onTap: () async {
                 String query = _textController.text.trim();
                 if (query.isNotEmpty) {
-                  widget.userController.fetchUsers(query).then((value) {
-                    if (value.userId != null) {
-                      Navigator.of(context).pushNamed('/user');
-                    } else {
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Usuário não encontrado'),
-                          backgroundColor: Colors.red,
-                        ),
-                      );
-                    }
-                  });
+                  await widget.userController.fetchUsers(query);
+                  if (widget.userController.error.isEmpty && widget.userController.user.userId != null) {
+                    Navigator.of(context).pushNamed('/user');
+                  } else {
+                    _showErrorSnackbar(widget.userController.error.isEmpty ? 'Usuário não encontrado' : 'Erro: ${widget.userController.error}');
+                  }
                 } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('Digite o nome do usuário'),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
+                  _showErrorSnackbar('Digite o nome do usuário');
                 }
               },
               child: Container(
@@ -115,6 +104,15 @@ class SearchPageState extends State<SearchPage> {
             ),
           ],
         ),
+      ),
+    );
+  }
+
+  void _showErrorSnackbar(String message) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: Text(message),
+        backgroundColor: Colors.red,
       ),
     );
   }
