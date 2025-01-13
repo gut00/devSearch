@@ -1,4 +1,4 @@
-import 'package:dev_search/src/core/api/github_api.dart';
+import 'package:dev_search/src/core/api/github_token.dart';
 import 'package:dev_search/src/modules/repositories/model/repositorie_model.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
