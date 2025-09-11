@@ -45,5 +45,10 @@
 	<true/>
 	<key>UIApplicationSupportsIndirectInputEvents</key>
 	<true/>
+	<!-- Camera and Photo Library permissions for OCR functionality -->
+	<key>NSCameraUsageDescription</key>
+	<string>Este app precisa acessar a câmera para capturar imagens e extrair texto.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Este app precisa acessar a galeria de fotos para selecionar imagens e extrair texto.</string>
 </dict>
 </plist>
